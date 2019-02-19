@@ -1,0 +1,25 @@
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: hug-a-ton
+features:
+  bot_user:
+    display_name: hug-a-ton
+    always_online: true
+  slash_commands:
+    - command: /hug
+      url: https://hug-a-ton.dev.draios.com
+      description: Give a hug to the people you want to
+      usage_hint: "[@person] [message] "
+      should_escape: true
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - chat:write.public
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

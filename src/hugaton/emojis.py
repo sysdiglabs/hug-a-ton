@@ -1,0 +1,7 @@
+hugging_face = ":hug-a-ton:"
+wave = ":wave:"
+forbidden = ":no_entry_sign:"
+zero = ":zero:"
+sad_face = ":sadpanda:"
+party = ":hug-a-ton-intensifies:"
+tada = ":tada:"
