@@ -24,3 +24,10 @@ def give_hug(sender_id, receiver_id, message):
 #  spent: boolean
 #}
 ########################
+
+# https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.03.html
+# https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
+# print(f"  aaa {type(event)} {event=}")
+# table_name = 'AlvarFirstTest'
+# dynamodb = boto3.resource('dynamodb')
+# table = dynamodb.Table(table_name)
