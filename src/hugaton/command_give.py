@@ -3,7 +3,7 @@ import slack
 import pprint
 
 
-def command_give(body, receiver, message):
+    def command_give(body, receiver, message):
 
     sender_id = body["user_id"][0]
     sender_name = body["user_name"][0]
