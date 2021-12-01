@@ -1,7 +1,7 @@
 from dynamodb import something
 from slack import get_userid_from_user
 from slack import something
-from command_balance import get_hug_available
+#from command_balance import get_hug_available
 
 def command_give(sender, receiver, message):
 
