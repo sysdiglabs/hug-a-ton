@@ -9,7 +9,7 @@ features:
     always_online: true
   slash_commands:
     - command: /hug
-      url: https://hug.dev.draios.com
+      url: https://hug-a-ton.dev.draios.com
       description: Give a hug to the people you want to
       usage_hint: "[@person] [message] "
       should_escape: true

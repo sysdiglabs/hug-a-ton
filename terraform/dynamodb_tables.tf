@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "hugs" {
-  name           = "${var.prefix}-hugs"
+  name           = "${local.prefix}-hugs"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
@@ -17,6 +17,6 @@ resource "aws_dynamodb_table" "hugs" {
   }
 
   tags = {
-    Name = "${var.prefix}-hugs"
+    Name = "${local.prefix}-hugs"
   }
 }
