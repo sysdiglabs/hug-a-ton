@@ -1,9 +1,10 @@
 def something():
     pass
 
-def get_userid_from_user(user):
+def get_user_info(user):
     #<@id|nombre>
-    return user.split('|')[0].split('@')[1]
+    id, name = user.split('|')
+    return id.split('@')[1], name[:-1]
 
 def notify_channel():
     pass

@@ -3,16 +3,16 @@ resource "aws_dynamodb_table" "hugs" {
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
-  hash_key       = "sender"
-  range_key      = "receiver"
+  hash_key       = "sender_id"
+  range_key      = "timestamp"
 
   attribute {
-    name = "sender"
+    name = "sender_id"
     type = "S"
   }
 
   attribute {
-    name = "receiver"
+    name = "timestamp"
     type = "S"
   }
 

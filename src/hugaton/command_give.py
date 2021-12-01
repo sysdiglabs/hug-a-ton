@@ -5,7 +5,8 @@ import pprint
 def command_give(body, receiver, message):
 
     sender_id = body['user_id'][0]
-    receiver_id = slack.get_userid_from_user(receiver)
+    sender_name = body['user_name'][0]
+    receiver_id, receiver_name = slack.get_user_info(receiver)
 
     if check_sender_receiver(sender_id, receiver_id):
         return {
@@ -21,7 +22,7 @@ def command_give(body, receiver, message):
             'body': "You ran out of hugs"
         }
 
-    dynamodb.give_hug(sender_id, receiver_id, message)
+    dynamodb.give_hug(sender_id, sender_name, receiver_id, receiver_name, message)
     slack.notify_channel()
     return {
         'statusCode': 200,
