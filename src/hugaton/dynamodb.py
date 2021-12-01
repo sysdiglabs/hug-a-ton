@@ -20,7 +20,7 @@ from boto3.dynamodb.conditions import Attr
 # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.03.html
 # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+table = dynamodb.Table(os.getenv('DYNAMODB_TABLE', "aws_dynamodb_table.hugs.name"))
 
 
 def hugs_available(user_id, user_name):
@@ -29,7 +29,7 @@ def hugs_available(user_id, user_name):
     )
     # TODO: Filter this in DB to improve performance
     hugs_given_this_month = [item for item in response['Items'] if is_hug_given_this_month(item, datetime.datetime.utcnow())] 
-    hug_per_month = int(os.environ['HUGS_PER_MONTH'])
+    hug_per_month = int(os.getenv('HUGS_PER_MONTH',20))
     
     return hug_per_month - len(hugs_given_this_month)
 

@@ -1,6 +1,15 @@
+from unittest import mock
+
 import pytest
 
+import dynamodb
 from lambda_function import lambda_handler, execute_command
+
+class mockTable:
+    def query(*args, **kwords):
+        return {'Items':[]}
+    def put_item(*args, **kwords):
+        return
 
 HELP_EVENT = {
     "version": "2.0",
@@ -74,17 +83,17 @@ BODY = {
 BALANCE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": "balance is secret",
+    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":hugging_face: *20 hugs available*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Hug away! Remember hugs are reset at the beginning of the month"}}, {"type": "section", "text": {"type": "mrkdwn", "text": ":sad_panda: *No hugs received yet*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Don\'t give up! Keep trying, soon your effort will be recognized!"}}]}',
 }
 DONATE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": "20 hubs donated",
+    "body": '<@U02P3MKFSEQ|jorge.maroto> has donated foo hugs to bar',
 }
 GIVE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": "give ['U02P3MKFSEQ'] <@U02NYLASM52|andres.fuentes> He helps me too much"
+    "body": "Sended",
 }
 
 
@@ -113,7 +122,9 @@ GIVE_RESPONSE = {
         ),
     ]
 )
-def test_parse_command(text, response):
+@mock.patch('dynamodb.table', mockTable)
+def test_parse_command(text, response, mocker):
     body = BODY
     body["text"] = [f"{text}"]
     assert execute_command(body) == response
+
