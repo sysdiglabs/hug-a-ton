@@ -3,7 +3,7 @@ import slack
 
 def command_give(body, receiver, message):
 
-    sender_id = body['user_id']
+    sender_id = body['user_id'][0]
     receiver_id = slack.get_userid_from_user(receiver)
 
     if check_sender_receiver(sender_id, receiver_id):
