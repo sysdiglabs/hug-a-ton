@@ -18,6 +18,10 @@ def lambda_handler(event, context):
 
 
 def execute_command(body):
+    # If command has no params, `body` has no `text`
+    if 'text' not in body:
+        return command_help()
+
     params = body['text'][0].split()
     keyword = params[0]
     if keyword == 'balance':
