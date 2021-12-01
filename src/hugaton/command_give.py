@@ -1,6 +1,6 @@
-def command_give(command):
+def command_give(sender, receiver, message):
     return {
-        "statusCode": 200,
-        "headers": {"Content-type": "application/json"},
-        "body": f"give {command} {type(command)} {command.split()}",
+        'statusCode': 200,
+        'headers': {'Content-type': 'application/json'},
+        'body': f"give {sender} {receiver} {message}"
     }
