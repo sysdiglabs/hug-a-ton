@@ -1,5 +1,5 @@
 data "aws_route53_zone" "this" {
-  name = local.domain_name
+  name         = local.domain_name
   private_zone = false
 }
 

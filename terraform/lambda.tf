@@ -14,7 +14,7 @@ module "lambda_function" {
     DYNAMODB_TABLE = aws_dynamodb_table.hugs.name
     HUGS_PER_MONTH = 20
     # -hugs_ test env
-    SLACK_CHANNEL_ID = "C02P6RXLQ83"
+    SLACK_CHANNEL_ID  = "C02P6RXLQ83"
     MIN_HUG_TO_DONATE = 50
   }
 
@@ -26,7 +26,7 @@ module "lambda_function" {
   }
 
   attach_policy_json = true
-  policy_json = <<-EOF
+  policy_json        = <<-EOF
       {
         "Version": "2012-10-17",
         "Statement": [{

@@ -8,10 +8,10 @@ from command_help import command_help
 
 
 def lambda_handler(event, context):
-    body = event['body']
-    if event['isBase64Encoded']:
-        body = base64.b64decode(event['body'])
-    body = body.decode('utf-8')
+    body = event["body"]
+    if event["isBase64Encoded"]:
+        body = base64.b64decode(event["body"])
+    body = body.decode("utf-8")
     body = urllib.parse.parse_qs(body)
     print(body)
     return execute_command(body)
@@ -19,16 +19,16 @@ def lambda_handler(event, context):
 
 def execute_command(body):
     # If command has no params, `body` has no `text`
-    if 'text' not in body:
+    if "text" not in body:
         return command_help()
 
-    params = body['text'][0].split()
+    params = body["text"][0].split()
     keyword = params[0]
-    if keyword == 'balance':
+    if keyword == "balance":
         return command_balance(params[1:], body)
-    elif keyword == 'donate':
+    elif keyword == "donate":
         return command_donate(params[1:], body)
-    elif keyword.startswith('<@'):
-        return command_give(body, keyword, ' '.join(params[1:]))
+    elif keyword.startswith("<@"):
+        return command_give(body, keyword, " ".join(params[1:]))
     else:
         return command_help()
