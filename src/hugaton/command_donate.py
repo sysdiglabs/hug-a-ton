@@ -1,9 +1,9 @@
 def command_donate(params, body):
     if not validate_params(params):
         return {
-            'statusCode': 200,
-            'headers': {'Content-type': 'application/json'},
-            'body': f"Usage: {body['command'][0]} donate <num_hugs> <charity_link>"
+            "statusCode": 200,
+            "headers": {"Content-type": "application/json"},
+            "body": f"Usage: {body['command'][0]} donate <num_hugs> <charity_link>",
         }
 
     user_id = body["user_id"][0]
@@ -12,9 +12,9 @@ def command_donate(params, body):
     charity_link = params[1]
 
     return {
-        'statusCode': 200,
-        'headers': {'Content-type': 'application/json'},
-        'body': f"<@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}"
+        "statusCode": 200,
+        "headers": {"Content-type": "application/json"},
+        "body": f"<@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}",
     }
 
 

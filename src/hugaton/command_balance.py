@@ -3,19 +3,19 @@ import json
 
 
 def command_balance(_, body):
-    hugs_available = dynamodb.hugs_available(body['user_id'][0], body['user_name'][0])
-    hugs_received = dynamodb.hugs_received(body['user_id'][0], body['user_name'][0])
+    hugs_available = dynamodb.hugs_available(body["user_id"][0], body["user_name"][0])
+    hugs_received = dynamodb.hugs_received(body["user_id"][0], body["user_name"][0])
 
     message = format_message(hugs_available, hugs_received)
     return {
-        'statusCode': 200,
-        'headers': {'Content-type': 'application/json'},
-        'body': json.dumps(message)
+        "statusCode": 200,
+        "headers": {"Content-type": "application/json"},
+        "body": json.dumps(message),
     }
 
 
 def format_message(hugs_available, hugs_received):
-    message = { "blocks" : [] }
+    message = {"blocks": []}
     if hugs_available > 0:
         message["blocks"] += hugs_available_block(hugs_available)
     else:
@@ -38,16 +38,16 @@ def hugs_available_block(hugs):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f":hugging_face: *{hugs_text} available*"
-            }
+                "text": f":hugging_face: *{hugs_text} available*",
+            },
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Hug away! Remember hugs are reset at the beginning of the month"
-            }
-        }
+                "text": "Hug away! Remember hugs are reset at the beginning of the month",
+            },
+        },
     ]
 
 
@@ -55,18 +55,15 @@ def no_hugs_available_block():
     return [
         {
             "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f":sad_panda: *No hugs available*"
-            }
+            "text": {"type": "mrkdwn", "text": f":sad_panda: *No hugs available*"},
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Don't get too sad, new hugs are delivered every month!"
-            }
-        }
+                "text": "Don't get too sad, new hugs are delivered every month!",
+            },
+        },
     ]
 
 
@@ -80,16 +77,16 @@ def hugs_received_block(hugs):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f":sysdig_party: *{hugs_text} received*"
-            }
+                "text": f":sysdig_party: *{hugs_text} received*",
+            },
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Your teammates are recognizing your contributions! Keep up the great work!"
-            }
-        }
+                "text": "Your teammates are recognizing your contributions! Keep up the great work!",
+            },
+        },
     ]
 
 
@@ -97,16 +94,13 @@ def no_hugs_received_block():
     return [
         {
             "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f":sad_panda: *No hugs received yet*"
-            }
+            "text": {"type": "mrkdwn", "text": f":sad_panda: *No hugs received yet*"},
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Don't give up! Keep trying, soon your effort will be recognized!"
-            }
-        }
+                "text": "Don't give up! Keep trying, soon your effort will be recognized!",
+            },
+        },
     ]

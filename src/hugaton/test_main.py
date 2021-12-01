@@ -5,11 +5,14 @@ import pytest
 import dynamodb
 from lambda_function import lambda_handler, execute_command
 
+
 class mockTable:
     def query(*args, **kwords):
-        return {'Items':[]}
+        return {"Items": []}
+
     def put_item(*args, **kwords):
         return
+
 
 HELP_EVENT = {
     "version": "2.0",
@@ -57,6 +60,8 @@ HELP_RESPONSE = {
     "headers": {"Content-type": "application/json"},
     "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":wave: *Welcome to Hug-a-ton*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Use this command to share love & appreciation with your coworkers"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Give a hug*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Somebody helped you out? Have you seen an awesome contribution? Just sent a hug to a coworker with:```/hug @john.doe [message]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "An anonimous message will be posted to #-hugs_ with your message tagging the _hugee_"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Check your balance*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Wanna know the hugs you have available to give or the hugs you\'ve received? Use:```/hug balance```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "You\'ll get a private messsage with your balance"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Pay it forward*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Got enough hugs from your cowokers? Share the love outside Sysdig with:```/hug donate [quantity] [charity_link]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "A message will be post to #-hugs_ with about the donation and HR will reach out to proceed with the donation."}}]}',
 }
+
+
 def test_command_decode():
     r = lambda_handler(HELP_EVENT, context="")
     assert r == HELP_RESPONSE
@@ -88,7 +93,7 @@ BALANCE_RESPONSE = {
 DONATE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": '<@U02P3MKFSEQ|jorge.maroto> has donated foo hugs to bar',
+    "body": "<@U02P3MKFSEQ|jorge.maroto> has donated foo hugs to bar",
 }
 GIVE_RESPONSE = {
     "statusCode": 200,
@@ -101,30 +106,17 @@ GIVE_RESPONSE = {
     "text, response",
     [
         pytest.param(
-            '<@U02NYLASM52|andres.fuentes> He helps me too much',
+            "<@U02NYLASM52|andres.fuentes> He helps me too much",
             GIVE_RESPONSE,
-            id="give"
+            id="give",
         ),
-        pytest.param(
-            'balance foo bar',
-            BALANCE_RESPONSE,
-            id="balance"
-        ),
-        pytest.param(
-            'donate foo bar',
-            DONATE_RESPONSE,
-            id="donate"
-        ),
-        pytest.param(
-            'help',
-            HELP_RESPONSE,
-            id="help"
-        ),
-    ]
+        pytest.param("balance foo bar", BALANCE_RESPONSE, id="balance"),
+        pytest.param("donate foo bar", DONATE_RESPONSE, id="donate"),
+        pytest.param("help", HELP_RESPONSE, id="help"),
+    ],
 )
-@mock.patch('dynamodb.table', mockTable)
+@mock.patch("dynamodb.table", mockTable)
 def test_parse_command(text, response, mocker):
     body = BODY
     body["text"] = [f"{text}"]
     assert execute_command(body) == response
-
