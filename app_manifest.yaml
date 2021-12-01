@@ -2,13 +2,13 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: HugATon-2
+  name: HugATon
 features:
   bot_user:
-    display_name: HugATon-2
+    display_name: HugATon
     always_online: true
   slash_commands:
-    - command: /hugs
+    - command: /hug
       url: https://hug.dev.draios.com
       description: Give a hug to the people you want to
       usage_hint: "[@person] [message] "
