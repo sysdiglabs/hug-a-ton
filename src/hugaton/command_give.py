@@ -32,7 +32,7 @@ def command_give(body, receiver, message):
 def check_sender_receiver(sender_id, receiver_id):
     print(f'sender_id: {sender_id}')
     print(f'receiver_id: {receiver_id}')
-    return sender_id != receiver_id
+    return sender_id == receiver_id
 
 def check_hug_available(user_id, user_name):
     hugs_available = dynamodb.hugs_available(user_id, user_name)
