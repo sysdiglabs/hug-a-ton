@@ -1,5 +1,14 @@
 import json
 
+
+def command_help():
+    return {
+        'statusCode': 200,
+        'headers': {'Content-type': 'application/json'},
+        'body': json.dumps(HELP_MESSAGE)
+    }
+
+
 HELP_MESSAGE = \
     {
         "blocks": [
@@ -81,12 +90,4 @@ HELP_MESSAGE = \
                 }
             }
         ]
-    }
-
-
-def command_help(params, body):
-    return {
-        'statusCode': 200,
-        'headers': {'Content-type': 'application/json'},
-        'body': json.dumps(HELP_MESSAGE)
     }
