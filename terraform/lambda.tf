@@ -10,6 +10,9 @@ module "lambda_function" {
   publish = true
 
   source_path = "../src/hugaton"
+  environment_variables = {
+    DYNAMODB_TABLE = aws_dynamodb_table.hugs.name
+  }
 
   allowed_triggers = {
     AllowExecutionFromAPIGateway = {
