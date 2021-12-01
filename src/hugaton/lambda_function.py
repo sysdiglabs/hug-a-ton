@@ -45,4 +45,4 @@ def execute_command(body):
     elif keyword.startswith('<@'):
         return command_give(body['user_id'], keyword, ' '.join(params[1:]))
     else:
-        return command_help()
+        return command_help(params[1:], body)
