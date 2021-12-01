@@ -1,6 +1,8 @@
-def something():
-    # table_name = 'AlvarFirstTest'
-    # dynamodb = boto3.resource('dynamodb')
-    # table = dynamodb.Table(table_name)
-    # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
-    pass
+def hugs_available(user_id, user_name):
+    # TODO
+    return 1
+
+
+def hugs_received(user_id, user_name):
+    # TODO
+    return 2
