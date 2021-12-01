@@ -1,34 +1,38 @@
-from dynamodb import something
-from slack import get_userid_from_user
-from slack import something
-#from command_balance import get_hug_available
+import dynamodb
+import slack
 
-def command_give(sender, receiver, message):
+def command_give(body, receiver, message):
 
-    if check_sender_receiver(sender, receiver):
+    sender_id = body['user_id']
+    receiver_id = slack.get_userid_from_user(receiver)
+
+    if check_sender_receiver(sender_id, receiver_id):
         return {
             'statusCode': 200,
             'headers': {'Content-type': 'application/json'},
             'body': ":no_entry_sign: You can not send shovels to yourself"
         }
 
-    if check_hug_available(sender):
+    if check_hug_available(body['user_id'], body['user_name']):
         return {
             'statusCode': 200,
             'headers': {'Content-type': 'application/json'},
             'body': "You ran out of hugs"
         }
 
+    dynamodb.give_hug(sender_id, receiver_id, message)
+    slack.notify_channel()
     return {
         'statusCode': 200,
         'headers': {'Content-type': 'application/json'},
         'body': "Sended"
     }   
 
-def check_sender_receiver(sender, receiver):
-    return sender != get_userid_from_user(receiver)
+def check_sender_receiver(sender_id, receiver_id):
+    return sender_id != receiver_id
 
-def check_hug_available(sender):
-    return False
+def check_hug_available(user_id, user_name):
+    hugs_available = dynamodb.hugs_available(user_id, user_name)
+    return not hugs_available > 0 
 
 
