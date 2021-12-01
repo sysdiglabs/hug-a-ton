@@ -2,7 +2,6 @@ import base64
 import json
 import boto3
 from botocore.exceptions import ClientError
-import pprint
 import urllib.parse
 from command_balance import command_balance
 from command_donate import command_donate
@@ -25,14 +24,7 @@ def lambda_handler(event, context):
     body = body.decode('utf-8')
     body = urllib.parse.parse_qs(body)
     print(body)
-    validate_command(body)
     return execute_command(body)
-
-
-def validate_command(body):
-    command = body['command'][0]
-    if command != '/hug':
-        raise RuntimeError("We got an unexpected command: %s", command)
 
 
 def execute_command(body):
@@ -45,4 +37,4 @@ def execute_command(body):
     elif keyword.startswith('<@'):
         return command_give(body['user_id'], keyword, ' '.join(params[1:]))
     else:
-        return command_help()
+        return command_help(params[1:], body)

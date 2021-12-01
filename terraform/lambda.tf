@@ -2,7 +2,7 @@ module "lambda_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "~> 2.0"
 
-  function_name = "hug-a-ton-lambda"
+  function_name = "${var.prefix}-lambda"
   description   = "Hug-a-ton lambda handler for Slack integration"
   handler       = "lambda_function.lambda_handler"
   runtime       = "python3.9"

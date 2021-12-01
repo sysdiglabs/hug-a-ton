@@ -1,7 +1,7 @@
 module "api_gateway" {
   source = "terraform-aws-modules/apigateway-v2/aws"
 
-  name          = "hug-a-ton-slack"
+  name          = "${var.prefix}-slack"
   description   = "Hug-a-ton Slack integration"
   protocol_type = "HTTP"
 
@@ -30,10 +30,10 @@ module "api_gateway" {
   }
 
   tags = {
-    Name = "hug-a-ton-slack-integration"
+    Name = "${var.prefix}-slack-integration"
   }
 }
 
 resource "aws_cloudwatch_log_group" "logs" {
-  name = "hug-a-ton-api-logs"
+  name = "${var.prefix}-api-logs"
 }
