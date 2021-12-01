@@ -1,6 +1,9 @@
 import boto3
 import os
 import datetime
+import pprint
+from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Attr
 
 ###### Doc schema
 #{
@@ -21,13 +24,21 @@ table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
 
 def hugs_available(user_id, user_name):
-    # TODO
-    return 1
-
+    response = table.query(
+        KeyConditionExpression=Key('sender_id').eq(user_id)
+    )
+    # TODO: Filter this in DB to improve performance
+    hugs_given_this_month = [item for item in response['Items'] if is_hug_given_this_month(item, datetime.datetime.utcnow())] 
+    hug_per_month = int(os.environ['HUGS_PER_MONTH'])
+    
+    return hug_per_month - len(hugs_given_this_month)
 
 def hugs_received(user_id, user_name):
-    # TODO
-    return 2
+    response = table.query(
+        ExpressionAttributeValues=Attr('receiver_id').eq(user_id)
+    )
+    hugs_not_spent = [item for item in response['Items'] if not is_hug_spent(item)]
+    return len(hugs_not_spent)
 
 
 def give_hug(sender_id, sender_name, receiver_id, receiver_name, message):
@@ -42,3 +53,10 @@ def give_hug(sender_id, sender_name, receiver_id, receiver_name, message):
             'spent': False
         }
     )
+
+def is_hug_given_this_month(hug, now):
+    when = datetime.datetime.fromisoformat(hug['timestamp'])
+    return when.year==now.year and when.month == now.month
+
+def is_hug_spent(hug):
+    return hug['spent']

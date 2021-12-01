@@ -3,8 +3,8 @@ import json
 
 
 def command_balance(_, body):
-    hugs_available = dynamodb.hugs_available(body['user_id'], body['user_name'])
-    hugs_received = dynamodb.hugs_received(body['user_id'], body['user_name'])
+    hugs_available = dynamodb.hugs_available(body['user_id'][0], body['user_name'][0])
+    hugs_received = dynamodb.hugs_received(body['user_id'][0], body['user_name'][0])
 
     message = format_message(hugs_available, hugs_received)
     return {

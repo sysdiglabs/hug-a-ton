@@ -15,7 +15,7 @@ resource "aws_dynamodb_table" "hugs" {
     name = "timestamp"
     type = "S"
   }
-
+  
   tags = {
     Name = "${local.prefix}-hugs"
   }

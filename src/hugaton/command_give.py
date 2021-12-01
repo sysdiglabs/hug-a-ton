@@ -15,7 +15,7 @@ def command_give(body, receiver, message):
             'body': ":no_entry_sign: You can not send shovels to yourself"
         }
 
-    if check_hug_available(body['user_id'], body['user_name']):
+    if check_hug_available(sender_id, sender_name):
         return {
             'statusCode': 200,
             'headers': {'Content-type': 'application/json'},
