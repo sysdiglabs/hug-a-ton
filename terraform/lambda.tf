@@ -17,4 +17,38 @@ module "lambda_function" {
       source_arn = "${module.api_gateway.apigatewayv2_api_execution_arn}/*/*"
     }
   }
+
+  attach_policy_json = true
+  policy_json = <<-EOF
+      {
+        "Version": "2012-10-17",
+        "Statement": [{
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:BatchGetItem",
+              "dynamodb:GetItem",
+              "dynamodb:Query",
+              "dynamodb:Scan",
+              "dynamodb:BatchWriteItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem"
+            ],
+            "Resource": "${aws_dynamodb_table.hugs.arn}"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ],
+            "Resource": "${aws_cloudwatch_log_group.logs.arn}"
+          },
+          {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+          }
+        ]
+      }
+      EOF
 }
