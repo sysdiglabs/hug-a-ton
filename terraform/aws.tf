@@ -1,12 +1,5 @@
-# Configure AWS
-
-variable "region" {
-  default     = "us-east-1"
-  description = "Amazon AWS Region for deployment"
-}
-
 provider "aws" {
-  region = var.region
+  region = "us-east-1"
   ignore_tags {
     keys = ["AutoTag_Creator"]
   }
@@ -19,4 +12,13 @@ provider "aws" {
 
   # skip_requesting_account_id should be disabled to generate valid ARN in apigatewayv2_api_execution_arn
   skip_requesting_account_id = false
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "hug-a-ton"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "qa-tf-shared-backend-lock"
+  }
 }
