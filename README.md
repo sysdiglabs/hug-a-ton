@@ -2,7 +2,7 @@
 
 Hug-a-ton is a Slack bot to share love & appreciation with your coworkers.
 
-This project has been greatly influenced by the ideas implemented by https://github.com/Pagepro/open-kudos, 
+This project has been greatly influenced by the ideas implemented by https://github.com/Pagepro/open-kudos,
 so you might want to check that project first, specially since it's feature-richer and complete.
 
 Hug-a-ton attempts to be a simplified version of [OPEN KUDOS](https://pagepro.co/open-kudos.html) which
@@ -13,7 +13,7 @@ might suit the following use cases:
 * You get scared by TypeScript and rather use good old Python.
 
 
-# How it works 
+# How it works
 
 ## Give a hug
 
