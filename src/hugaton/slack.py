@@ -25,7 +25,7 @@ def get_user_info(user):
 
 def notify_hug_in_channel(receiver, message):
     url = "https://slack.com/api/chat.postMessage"
-    token = os.environ["SLACK_TOKEN"]
+    token = os.getenv("SLACK_TOKEN")
     slack_fields = {
         "channel": os.environ["SLACK_KUDOS_CHANNEL"],
         "blocks": json.dumps(format_text(receiver, message)),
