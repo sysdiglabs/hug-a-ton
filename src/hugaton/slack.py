@@ -12,6 +12,9 @@ def notify_hug_in_channel(receiver, message):
     url = "https://slack.com/api/chat.postMessage"
     # TODO move it to config and encrypt it
     token = "xoxb-2734598559365-2739893395668-zZ6AXbxzLbQSnxqnddwb6aLK"
+    # TODO maybe use two blocks:
+    # block 1: @foo got hugged
+    # block 2: message from sender
     message = {
         "channel": os.environ["SLACK_CHANNEL_ID"],
         "text": f":hugging_face:{receiver} got hugged: *{message.capitalize()}*",
