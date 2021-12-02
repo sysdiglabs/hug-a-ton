@@ -3,6 +3,7 @@ import os
 
 import dynamodb
 import slack
+from exception import SysdigException
 
 
 def hubs_received(body):
@@ -19,20 +20,21 @@ def command_donate(params, body):
         try:
             num_hugs = int(params[0])
         except ValueError as exc:
-            message = f"error"
-            return message
+            raise SysdigException(
+                f"Error. Number of hugs should be an integer. Current value = {params[0]}"
+            )
 
         charity_link = params[1]
         min_hub_to_donate = int(os.getenv("MIN_HUG_TO_DONATE", "50"))
-        slack_admin_channel = int(os.getenv("SLACK_ADMIN_CHANNEL", "12345"))
-        slack_kudos_channel = int(os.getenv("SLACK_KUDOS_CHANNEL", "12346"))
+        slack_admin_channel = os.getenv("SLACK_ADMIN_CHANNEL", "U02P4C83411")
+        slack_kudos_channel = os.getenv("SLACK_KUDOS_CHANNEL", "C02P6RXLQ83")
         hugs_received = hubs_received(body)
         if num_hugs < min_hub_to_donate:
             message = less_than_min_hugs_available_block(num_hugs, min_hub_to_donate)
         elif num_hugs > hugs_received:
             message = less_than_hugs_available_block(num_hugs, hugs_received)
         else:
-            public_message = f"<@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}"
+            public_message = f":tada: <@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}"
             slack.notify(slack_admin_channel, public_message)
             slack.notify(slack_kudos_channel, public_message)
             dynamodb.update_hugs(user_id, user_name, num_hugs)
