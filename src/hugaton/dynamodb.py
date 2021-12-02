@@ -39,7 +39,7 @@ def hugs_available(user_id, user_name):
 def hugs_received(user_id, user_name):
     scan_kwargs = {
         'FilterExpression': Key('receiver_id').eq(user_id),
-        'ProjectionExpression': "receiver_id, spent"
+        'ProjectionExpression': "receiver_id, spent",
     }
 
     done = False
@@ -49,7 +49,9 @@ def hugs_received(user_id, user_name):
         if start_key:
             scan_kwargs['ExclusiveStartKey'] = start_key
         response = table.scan(**scan_kwargs)
-        hugs_not_spent += len([item for item in response["Items"] if not is_hug_spent(item)])
+        hugs_not_spent += len(
+            [item for item in response["Items"] if not is_hug_spent(item)]
+        )
         start_key = response.get('LastEvaluatedKey', None)
         done = start_key is None
 
