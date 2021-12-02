@@ -12,7 +12,7 @@ module "api_gateway" {
   }
 
   domain_name                 = "${local.subdomain}.${local.domain_name}"
-  domain_name_certificate_arn = local.cert_arn
+  domain_name_certificate_arn = sensitive(var.cert_arn)
 
   default_stage_access_log_destination_arn = aws_cloudwatch_log_group.logs.arn
   default_stage_access_log_format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"

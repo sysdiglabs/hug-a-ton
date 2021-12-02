@@ -8,3 +8,9 @@ variable "domain_name" {
 variable "cert_arn" {
   description = "AMC certificate ARN for the API gateway"
 }
+variable "kudos_channel" {
+  description = "Slack channel to post hugs and donations"
+}
+variable "admin_channel" {
+  description = "Slack channel to post only donations"
+}
