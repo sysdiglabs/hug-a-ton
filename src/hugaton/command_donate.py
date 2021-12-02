@@ -7,8 +7,7 @@ from exception import SysdigException
 
 
 def hubs_received(body):
-    # dynamodb.hugs_received(body["user_id"][0], body["user_name"][0])
-    return 50
+    return dynamodb.hugs_received(body["user_id"][0], body["user_name"][0])
 
 
 def command_donate(params, body):

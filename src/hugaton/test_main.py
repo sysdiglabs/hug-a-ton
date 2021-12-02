@@ -111,7 +111,7 @@ GIVE_RESPONSE = {
             id="give",
         ),
         pytest.param("balance foo bar", BALANCE_RESPONSE, id="balance"),
-        pytest.param("donate 200 bar", DONATE_RESPONSE, id="donate"),
+        pytest.param("donate 2w00 bar", DONATE_RESPONSE, id="donate"),
         pytest.param("help", HELP_RESPONSE, id="help"),
     ],
 )
