@@ -80,3 +80,7 @@ def is_hug_given_this_month(hug, now):
 
 def is_hug_spent(hug):
     return hug["spent"]
+
+
+def update_hugs(user_id, user_name, num_hugs):
+    return

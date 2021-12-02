@@ -10,11 +10,17 @@ def get_user_info(user):
 
 
 def notify_hug_in_channel(receiver, message):
+    channel = os.getenv("SLACK_KUDOS_CHANNEL")
+    text = f"{emojis.hugging_face} {receiver} got hugged: *{message.capitalize()}*"
+    notify(channel, text)
+
+
+def notify(channel_id, message):
     url = "https://slack.com/api/chat.postMessage"
     token = os.environ['SLACK_TOKEN']
-    message = {
-        "channel": os.environ["SLACK_CHANNEL_ID"],
-        "text": f"{emojis.hugging_face} {receiver} got hugged: *{message.capitalize()}*",
+    fields = {
+        "channel": channel_id,
+        "text": message,
     }
     http = urllib3.PoolManager()
     response = http.request(
@@ -24,7 +30,6 @@ def notify_hug_in_channel(receiver, message):
             "Content-type": "application/json",
             "Authorization": f"Bearer {token}",
         },
-        fields=message,
+        fields=fields,
     )
     return response
-
