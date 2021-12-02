@@ -34,7 +34,9 @@ dynamodb = boto3.resource("dynamodb")
 
 
 def hugs_available(user_id, user_name):
-    table = dynamodb.Table(os.getenv("DYNAMODB_TABLE", "aws_dynamodb_table.hugs.name"))
+    table = dynamodb.Table(
+        os.getenv("DYNAMODB_HUG_TABLE", "aws_dynamodb_table.hugs.name")
+    )
     response = table.query(KeyConditionExpression=Key("sender_id").eq(user_id))
     # TODO: Filter this in DB to improve performance
     hugs_given_this_month = [
@@ -48,7 +50,9 @@ def hugs_available(user_id, user_name):
 
 
 def hugs_received(user_id, user_name):
-    table = dynamodb.Table(os.getenv("DYNAMODB_TABLE", "aws_dynamodb_table.hugs.name"))
+    table = dynamodb.Table(
+        os.getenv("DYNAMODB_HUG_TABLE", "aws_dynamodb_table.hugs.name")
+    )
     # TODO: Add index into "receiver_id" and change scan for query
     scan_kwargs = {
         "FilterExpression": Key("receiver_id").eq(user_id),
@@ -118,7 +122,7 @@ def donate(donator_id, donator_name, amount, charity_link):
 
 def mark_received_hugs_as_spent(receiver_id, receiver_name, amount):
     table = dynamodb.Table(
-        os.getenv("DYNAMODB_HUGS_TABLE", "aws_dynamodb_table.hugs.name")
+        os.getenv("DYNAMODB_HUG_TABLE", "aws_dynamodb_table.hugs.name")
     )
     # TODO: Add index into "receiver_id" and change scan for query
     scan_kwargs = {
@@ -134,13 +138,13 @@ def mark_received_hugs_as_spent(receiver_id, receiver_name, amount):
         response = table.scan(**scan_kwargs)
         hugs_to_spend = [item for item in response["Items"] if not is_hug_spent(item)]
         for hug in hugs_to_spend:
-            if hugs_spent > amount:
+            if hugs_spent >= amount:
                 return
             table.update_item(
                 Key={"sender_id": hug["sender_id"], "timestamp": hug["timestamp"]},
                 UpdateExpression="SET spent = :val1",
                 ExpressionAttributeValues={":val1": True},
             )
-            hugs_spent = +1
+            hugs_spent += 1
 
         start_key = response.get("LastEvaluatedKey", None)

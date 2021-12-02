@@ -46,7 +46,7 @@ def command_donate(params, body):
         transaction_id = dynamodb.donate(user_id, user_name, num_hugs, charity_link)
         public_message = f"{emojis.tada} <@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}"
         # TODO: Add more info to the admin message
-        admin_message = f"{emojis.tada} <@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link}"
+        admin_message = f"{emojis.tada} <@{user_id}|{user_name}> has donated {num_hugs} hugs to {charity_link} this transaction id {transaction_id}"
         slack.notify(slack_admin_channel, admin_message)
         slack.notify(slack_kudos_channel, public_message)
         message = f"{emojis.tada} You have donated {num_hugs} hugs to {charity_link}"
