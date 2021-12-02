@@ -10,9 +10,5 @@ terraform {
       source  = "hashicorp/null"
       version = ">= 2.0"
     }
-    sops = {
-      source  = "carlpett/sops"
-      version = "~> 0.5"
-    }
   }
 }
