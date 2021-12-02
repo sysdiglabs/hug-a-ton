@@ -2,10 +2,10 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: HugATon
+  name: hug-a-ton
 features:
   bot_user:
-    display_name: HugATon
+    display_name: hug-a-ton
     always_online: true
   slash_commands:
     - command: /hug
