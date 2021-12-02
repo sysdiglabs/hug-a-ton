@@ -8,11 +8,14 @@ def format_text(receiver, message):
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f":hugging_face: {receiver} got hugged"},
+            "text": {
+                "type": "mrkdwn",
+                "text": f":hugging_face: {receiver} got hugged:",
+            },
         },
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f"{message.capitalize()}"},
+            "text": {"type": "mrkdwn", "text": f"> {message.capitalize()}"},
         },
     ]
 
