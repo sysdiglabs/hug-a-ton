@@ -15,7 +15,7 @@ module "lambda_function" {
     HUGS_PER_MONTH    = 20
     MIN_HUG_TO_DONATE = 10
     # -hugs_ test env
-    SLACK_TOKEN         = "xoxb-2734598559365-2739893395668-zZ6AXbxzLbQSnxqnddwb6aLK"
+    SLACK_TOKEN         = local.slack_token
     SLACK_KUDOS_CHANNEL = "C02P6RXLQ83"
     SLACK_ADMIN_CHANNEL = "C02P6RXLQ83"
   }
@@ -42,7 +42,10 @@ module "lambda_function" {
               "dynamodb:PutItem",
               "dynamodb:UpdateItem"
             ],
-            "Resource": "${aws_dynamodb_table.hugs.arn}"
+            "Resource": [
+              "${aws_dynamodb_table.hugs.arn}",
+              "${aws_dynamodb_table.donations.arn}"
+            ]
           },
           {
             "Effect": "Allow",

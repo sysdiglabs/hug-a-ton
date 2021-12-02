@@ -12,7 +12,7 @@ def command_donate(params, body):
         return {
             "statusCode": 200,
             "headers": {"Content-type": "application/json"},
-            "body": f"Usage: {body['command'][0]} donate <num_hugs> <charity_link>",
+            "body": f"{emojis.forbidden} Usage: {body['command'][0]} donate <num_hugs> <charity_link>",
         }
 
     user_id = body["user_id"][0]
