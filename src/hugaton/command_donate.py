@@ -12,7 +12,7 @@ def hubs_received(body):
 
 def command_donate(params, body):
     if not validate_params(params):
-        message = f"Usage: {body['command'][0]} donate <num_hugs> <charity_link>"
+        message = f"{emojis.forbidden} Usage: {body['command'][0]} donate <num_hugs> <charity_link>"
     else:
         user_id = body["user_id"][0]
         user_name = body["user_name"][0]

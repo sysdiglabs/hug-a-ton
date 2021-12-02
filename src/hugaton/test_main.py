@@ -13,6 +13,9 @@ class mockTable:
     def put_item(*args, **kwords):
         return
 
+    def scan(*args, **kwords):
+        return {"Items": []}
+
 
 HELP_EVENT = {
     "version": "2.0",
@@ -93,7 +96,7 @@ BALANCE_RESPONSE = {
 DONATE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":sad_panda: *You only have received 50 hugs. You can not donate 200, as it is bigger*"}}]}',
+    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":sad_panda: *You only have received 0 hugs. You can not donate 200, as it is bigger*"}}]}',
 }
 GIVE_RESPONSE = {
     "statusCode": 200,
@@ -111,7 +114,7 @@ GIVE_RESPONSE = {
             id="give",
         ),
         pytest.param("balance foo bar", BALANCE_RESPONSE, id="balance"),
-        pytest.param("donate 2w00 bar", DONATE_RESPONSE, id="donate"),
+        pytest.param("donate 200 bar", DONATE_RESPONSE, id="donate"),
         pytest.param("help", HELP_RESPONSE, id="help"),
     ],
 )

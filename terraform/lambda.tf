@@ -17,7 +17,7 @@ module "lambda_function" {
     # -hugs_ test env
     SLACK_TOKEN         = "xoxb-2734598559365-2739893395668-zZ6AXbxzLbQSnxqnddwb6aLK"
     SLACK_KUDOS_CHANNEL = "C02P6RXLQ83"
-    SLACK_ADMIN_CHANNEL = "U02P4C83411"
+    SLACK_ADMIN_CHANNEL = "C02P6RXLQ83"
   }
 
   allowed_triggers = {
