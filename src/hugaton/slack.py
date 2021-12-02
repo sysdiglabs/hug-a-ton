@@ -10,14 +10,10 @@ def get_user_info(user):
 
 def notify_hug_in_channel(receiver, message):
     url = "https://slack.com/api/chat.postMessage"
-    # TODO move it to config and encrypt it
     token = os.environ['SLACK_TOKEN']
-    # TODO maybe use two blocks:
-    # block 1: @foo got hugged
-    # block 2: message from sender
     message = {
         "channel": os.environ["SLACK_CHANNEL_ID"],
-        "text": f":hugging_face:{receiver} got hugged: *{message.capitalize()}*",
+        "text": f":hugging_face: {receiver} got hugged: *{message.capitalize()}*",
     }
     http = urllib3.PoolManager()
     response = http.request(
@@ -29,4 +25,5 @@ def notify_hug_in_channel(receiver, message):
         },
         fields=message,
     )
-    # TODO: check response for errors and return proper feedback to the user
+    return response
+
