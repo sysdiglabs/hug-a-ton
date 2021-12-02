@@ -17,7 +17,7 @@ def command_give(body, receiver, message):
         response = "Please add a message to your hug!"
     else:
         dynamodb.give_hug(sender_id, sender_name, receiver_id, receiver_name, message)
-        slack.notify_channel()
+        slack.notify_hug_in_channel(receiver, message)
         response = ":hugging_face: Hug successfully sent!"
     return {
         "statusCode": 200,
