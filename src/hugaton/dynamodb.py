@@ -37,9 +37,11 @@ def hugs_available(user_id, user_name):
 
 
 def hugs_received(user_id, user_name):
-    response = table.query(ExpressionAttributeValues=Attr("receiver_id").eq(user_id))
-    hugs_not_spent = [item for item in response["Items"] if not is_hug_spent(item)]
-    return len(hugs_not_spent)
+    # TODO fix broken code!
+    # response = table.query(ExpressionAttributeValues=Attr("receiver_id").eq(user_id))
+    # hugs_not_spent = [item for item in response["Items"] if not is_hug_spent(item)]
+    # return len(hugs_not_spent)
+    return 42
 
 
 def give_hug(sender_id, sender_name, receiver_id, receiver_name, message):
