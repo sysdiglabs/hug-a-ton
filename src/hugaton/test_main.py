@@ -93,12 +93,22 @@ BALANCE_RESPONSE = {
 DONATE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": "<@U02P3MKFSEQ|jorge.maroto> has donated foo hugs to bar",
+    "body": {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ":sad_panda: *You only have received 0 hugs, and min required is 50*",
+                },
+            }
+        ]
+    },
 }
 GIVE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": "Sended",
+    "body": ":hugging-face: Hug successfully sent!",
 }
 
 
