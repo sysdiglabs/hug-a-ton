@@ -1,4 +1,5 @@
 import json
+import emojis
 
 
 def command_help():
@@ -13,7 +14,7 @@ HELP_MESSAGE = {
     "blocks": [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": ":wave: *Welcome to Hug-a-ton*"},
+            "text": {"type": "mrkdwn", "text": f"{emojis.wave} *Welcome to Hug-a-ton*"},
         },
         {
             "type": "section",

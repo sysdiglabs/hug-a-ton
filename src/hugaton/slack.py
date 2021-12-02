@@ -1,5 +1,6 @@
 import os
 import urllib3
+import emojis
 
 
 def get_user_info(user):
@@ -13,7 +14,7 @@ def notify_hug_in_channel(receiver, message):
     token = os.environ['SLACK_TOKEN']
     message = {
         "channel": os.environ["SLACK_CHANNEL_ID"],
-        "text": f":hugging_face: {receiver} got hugged: *{message.capitalize()}*",
+        "text": f"{emojis.hugging_face} {receiver} got hugged: *{message.capitalize()}*",
     }
     http = urllib3.PoolManager()
     response = http.request(
