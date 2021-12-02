@@ -108,7 +108,7 @@ DONATE_RESPONSE = {
 GIVE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": ":hugging-face: Hug successfully sent!",
+    "body": ":hugging_face: Hug successfully sent!",
 }
 
 
