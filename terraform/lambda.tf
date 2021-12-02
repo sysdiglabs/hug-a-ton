@@ -14,11 +14,11 @@ module "lambda_function" {
     DYNAMODB_HUG_TABLE       = aws_dynamodb_table.hugs.name
     DYNAMODB_DONATIONS_TABLE = aws_dynamodb_table.donations.name
     HUGS_PER_MONTH           = 20
-    MIN_HUG_TO_DONATE        = 10
+    MIN_HUG_TO_DONATE        = 100
     # -hugs_ test env
     SLACK_TOKEN         = local.slack_token
-    SLACK_KUDOS_CHANNEL = "C02P6RXLQ83"
-    SLACK_ADMIN_CHANNEL = "C02P6RXLQ83"
+    SLACK_KUDOS_CHANNEL = "C02P7B2B2P7"
+    SLACK_ADMIN_CHANNEL = "U01QV1Z5P60"
   }
 
   allowed_triggers = {
