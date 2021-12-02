@@ -11,9 +11,10 @@ module "lambda_function" {
 
   source_path = "../src/hugaton"
   environment_variables = {
-    DYNAMODB_TABLE    = aws_dynamodb_table.hugs.name
-    HUGS_PER_MONTH    = 20
-    MIN_HUG_TO_DONATE = 50
+    DYNAMODB_HUG_TABLE       = aws_dynamodb_table.hugs.name
+    DYNAMODB_DONATIONS_TABLE = aws_dynamodb_table.donations.name
+    HUGS_PER_MONTH           = 20
+    MIN_HUG_TO_DONATE        = 10
     # -hugs_ test env
     SLACK_TOKEN         = local.slack_token
     SLACK_KUDOS_CHANNEL = "C02P6RXLQ83"

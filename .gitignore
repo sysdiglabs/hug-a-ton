@@ -1,4 +1,5 @@
 .terraform
 builds
 terraform.tfstate*
+terraform/.sysdig.tfvars
 
