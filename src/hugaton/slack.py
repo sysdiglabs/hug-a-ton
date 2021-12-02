@@ -16,7 +16,7 @@ def notify_hug_in_channel(receiver, message):
     # block 1: @foo got hugged
     # block 2: message from sender
     message = {
-        "channel": os.environ["SLACK_CHANNEL_ID"],
+        "channel": os.getenv("SLACK_CHANNEL_ID", "C02P6RXLQ83"),
         "text": f":hugging_face:{receiver} got hugged: *{message.capitalize()}*",
     }
     http = urllib3.PoolManager()
@@ -30,3 +30,7 @@ def notify_hug_in_channel(receiver, message):
         fields=message,
     )
     # TODO: check response for errors and return proper feedback to the user
+
+
+def notify(channel_id, message):
+    return
