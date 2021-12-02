@@ -16,9 +16,9 @@ module "lambda_function" {
     HUGS_PER_MONTH           = 20
     MIN_HUG_TO_DONATE        = 100
     # -hugs_ test env
-    SLACK_TOKEN         = local.slack_token
-    SLACK_KUDOS_CHANNEL = "C02P7B2B2P7"
-    SLACK_ADMIN_CHANNEL = "U01QV1Z5P60"
+    SLACK_TOKEN         = sensitive(var.slack_token)
+    SLACK_KUDOS_CHANNEL = var.kudos_channel
+    SLACK_ADMIN_CHANNEL = var.admin_channel
   }
 
   allowed_triggers = {
