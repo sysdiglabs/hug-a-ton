@@ -42,7 +42,10 @@ module "lambda_function" {
               "dynamodb:PutItem",
               "dynamodb:UpdateItem"
             ],
-            "Resource": "${aws_dynamodb_table.hugs.arn}"
+            "Resource": [
+              "${aws_dynamodb_table.hugs.arn}",
+              "${aws_dynamodb_table.donations.arn}"
+            ]
           },
           {
             "Effect": "Allow",
