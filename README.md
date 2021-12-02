@@ -9,7 +9,7 @@ Hug-a-ton attempts to be a simplified version of [OPEN KUDOS](https://pagepro.co
 might suit the following use cases:
 
 * You have already an AWS infrastructure and want to deploy the backend there.
-* You like `Infra as Code` and want to have a repeatable way of deploying your infrastrucure.
+* You like `Infra as Code` and want to have a repeatable way of deploying your infrastructure.
 * You get scared by TypeScript and rather use good old Python.
 
 Logo designed by http://www.instagram.com/tinarose_artist
