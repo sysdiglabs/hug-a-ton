@@ -41,3 +41,24 @@ def notify_hug_in_channel(receiver, message):
         fields=slack_fields,
     )
     return response
+
+
+def notify(channel_id, message):
+    url = "https://slack.com/api/chat.postMessage"
+    token = os.getenv("SLACK_TOKEN")
+
+    slack_fields = {
+        "channel": channel_id,
+        "text": message,
+    }
+    http = urllib3.PoolManager()
+    response = http.request(
+        "POST",
+        url,
+        headers={
+            "Content-type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        fields=slack_fields,
+    )
+    return response
