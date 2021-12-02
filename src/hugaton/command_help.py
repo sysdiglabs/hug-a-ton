@@ -19,7 +19,7 @@ HELP_MESSAGE = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Use this command to share love & appreciation with your coworkers",
+                "text": "Use this command to share love & appreciation with your coworkers.",
             },
         },
         {"type": "section", "text": {"type": "mrkdwn", "text": "*Give a hug*"}},
@@ -27,14 +27,14 @@ HELP_MESSAGE = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Somebody helped you out? Have you seen an awesome contribution? Just sent a hug to a coworker with:```/hug @john.doe [message]```",
+                "text": "Somebody helped you out? Have you seen an awesome contribution? Just send a hug to a coworker with:```/hug @john.doe [message]```",
             },
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "An anonimous message will be posted to #-hugs_ with your message tagging the _hugee_",
+                "text": "An anonymous message will be posted to #-hugs_ with your message tagging the _hugee_",
             },
         },
         {"type": "section", "text": {"type": "mrkdwn", "text": "*Check your balance*"}},
@@ -42,14 +42,14 @@ HELP_MESSAGE = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Wanna know the hugs you have available to give or the hugs you've received? Use:```/hug balance```",
+                "text": "Wanna know the hugs you have available to give, or the hugs you've received? Use:```/hug balance```",
             },
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "You'll get a private messsage with your balance",
+                "text": "You'll get a private message with your balance",
             },
         },
         {"type": "section", "text": {"type": "mrkdwn", "text": "*Pay it forward*"}},
