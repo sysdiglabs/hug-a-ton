@@ -30,5 +30,7 @@ def execute_command(body):
         return command_donate(params[1:], body)
     elif keyword.startswith("<@"):
         return command_give(body, keyword, " ".join(params[1:]))
+    elif keyword == "give":
+        return command_give(body, params[1], " ".join(params[2:]))
     else:
         return command_help()

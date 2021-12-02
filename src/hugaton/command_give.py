@@ -10,17 +10,19 @@ def command_give(body, receiver, message):
     receiver_id, receiver_name = slack.get_user_info(receiver)
 
     if check_sender_receiver(sender_id, receiver_id):
-        message = ":no_entry_sign: You can not send shovels to yourself"
+        response = ":no_entry_sign: You can not hug yourself"
     elif check_hug_available(sender_id, sender_name):
-        message: ":zero: No hugs available"
+        response = ":zero: No hugs available"
+    elif not message:
+        response = "Please add a message to your hug!"
     else:
         dynamodb.give_hug(sender_id, sender_name, receiver_id, receiver_name, message)
-        slack.notify_channel()
-        message = ":hugging-face: Hug successfully sent!"
+        slack.notify_hug_in_channel(receiver, message)
+        response = ":hugging_face: Hug successfully sent!"
     return {
         "statusCode": 200,
         "headers": {"Content-type": "application/json"},
-        "body": message,
+        "body": response,
     }
 
 
