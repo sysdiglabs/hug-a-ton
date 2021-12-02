@@ -58,7 +58,7 @@ def no_hugs_available_block():
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f":{emojis.sad_face} *No hugs available*",
+                "text": f"{emojis.sad_face} *No hugs available*",
             },
         },
         {

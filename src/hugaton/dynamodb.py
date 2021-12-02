@@ -6,6 +6,7 @@ from boto3.dynamodb.conditions import Key
 from boto3.dynamodb.conditions import Attr
 
 ###### Doc schema
+# Table of hugs
 # {
 #  timestamp: string
 #  sender_name: string
@@ -14,6 +15,16 @@ from boto3.dynamodb.conditions import Attr
 #  receiver_id: string
 #  message: string
 #  spent: boolean
+# }
+#
+# Table of donations
+# {
+#  transaction_id: string
+#  timestamp: string
+#  donator_name: string
+#  donator_id: string
+#  amount: number
+#  destination: string
 # }
 ########################
 
