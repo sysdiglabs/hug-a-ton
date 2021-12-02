@@ -14,7 +14,7 @@ def notify_hug_in_channel(receiver, message):
     token = "xoxb-2734598559365-2739893395668-zZ6AXbxzLbQSnxqnddwb6aLK"
     message = {
         "channel": os.environ["SLACK_CHANNEL_ID"],
-        "text": f":hugging_face:{receiver} got hugged: {message}",
+        "text": f":hugging_face:{receiver} got hugged: *{message.capitalize()}*",
     }
     http = urllib3.PoolManager()
     response = http.request(
