@@ -12,6 +12,8 @@ might suit the following use cases:
 * You like `Infra as Code` and want to have a repeatable way of deploying your infrastrucure.
 * You get scared by TypeScript and rather use good old Python.
 
+Logo designed by http://www.instagram.com/tinarose_artist
+
 
 # How it works
 
