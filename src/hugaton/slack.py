@@ -1,5 +1,6 @@
 import os
 import urllib3
+import emojis
 
 
 def get_user_info(user):
@@ -9,18 +10,14 @@ def get_user_info(user):
 
 
 def notify_hug_in_channel(receiver, message):
-    channel = os.getenv("SLACK_KUDOS_CHANNEL", "C02P6RXLQ83")
-    text = f":hugging_face:{receiver} got hugged: *{message.capitalize()}*"
+    channel = os.getenv("SLACK_KUDOS_CHANNEL")
+    text = f"{emojis.hugging_face} {receiver} got hugged: *{message.capitalize()}*"
     notify(channel, text)
 
 
 def notify(channel_id, message):
     url = "https://slack.com/api/chat.postMessage"
-    # TODO move it to config and encrypt it
-    token = "xoxb-2734598559365-2739893395668-zZ6AXbxzLbQSnxqnddwb6aLK"
-    # TODO maybe use two blocks:
-    # block 1: @foo got hugged
-    # block 2: message from sender
+    token = os.environ["SLACK_TOKEN"]
     fields = {
         "channel": channel_id,
         "text": message,
@@ -35,5 +32,4 @@ def notify(channel_id, message):
         },
         fields=fields,
     )
-    print(f"{response.status} {response.data}")
     return response

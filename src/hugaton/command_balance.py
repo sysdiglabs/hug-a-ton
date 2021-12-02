@@ -1,5 +1,6 @@
 import dynamodb
 import json
+import emojis
 
 
 def command_balance(_, body):
@@ -38,7 +39,7 @@ def hugs_available_block(hugs):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f":hugging_face: *{hugs_text} available*",
+                "text": f"{emojis.hugging_face} *{hugs_text} available*",
             },
         },
         {
@@ -55,7 +56,10 @@ def no_hugs_available_block():
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f":sad_panda: *No hugs available*"},
+            "text": {
+                "type": "mrkdwn",
+                "text": f":{emojis.sad_face} *No hugs available*",
+            },
         },
         {
             "type": "section",
@@ -77,7 +81,7 @@ def hugs_received_block(hugs):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f":sysdig_party: *{hugs_text} received*",
+                "text": f"{emojis.party} *{hugs_text} received*",
             },
         },
         {
@@ -94,7 +98,10 @@ def no_hugs_received_block():
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f":sad_panda: *No hugs received yet*"},
+            "text": {
+                "type": "mrkdwn",
+                "text": f"{emojis.sad_face} *No hugs received yet*",
+            },
         },
         {
             "type": "section",

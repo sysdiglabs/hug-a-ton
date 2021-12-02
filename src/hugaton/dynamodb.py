@@ -37,6 +37,7 @@ def hugs_available(user_id, user_name):
 
 
 def hugs_received(user_id, user_name):
+    # TODO: FAdd index into "receiver_id" and change scan for query
     scan_kwargs = {
         "FilterExpression": Key("receiver_id").eq(user_id),
         "ProjectionExpression": "receiver_id, spent",
