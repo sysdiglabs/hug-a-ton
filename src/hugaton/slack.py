@@ -17,7 +17,7 @@ def notify_hug_in_channel(receiver, message):
 
 def notify(channel_id, message):
     url = "https://slack.com/api/chat.postMessage"
-    token = os.environ['SLACK_TOKEN']
+    token = os.environ["SLACK_TOKEN"]
     fields = {
         "channel": channel_id,
         "text": message,

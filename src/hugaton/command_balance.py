@@ -56,7 +56,10 @@ def no_hugs_available_block():
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f":{emojis.sad_face} *No hugs available*"},
+            "text": {
+                "type": "mrkdwn",
+                "text": f":{emojis.sad_face} *No hugs available*",
+            },
         },
         {
             "type": "section",
@@ -95,7 +98,10 @@ def no_hugs_received_block():
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f"{emojis.sad_face} *No hugs received yet*"},
+            "text": {
+                "type": "mrkdwn",
+                "text": f"{emojis.sad_face} *No hugs received yet*",
+            },
         },
         {
             "type": "section",

@@ -24,7 +24,9 @@ def command_give(body, receiver, message):
         else:
             hug_text = f"{hugs_left} hugs"
 
-        response = f"{emojis.hugging_face} Hug successfully sent!. You have {hug_text} left"
+        response = (
+            f"{emojis.hugging_face} Hug successfully sent!. You have {hug_text} left"
+        )
     return {
         "statusCode": 200,
         "headers": {"Content-type": "application/json"},
