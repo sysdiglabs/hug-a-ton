@@ -37,9 +37,23 @@ def hugs_available(user_id, user_name):
 
 
 def hugs_received(user_id, user_name):
-    response = table.query(ExpressionAttributeValues=Attr("receiver_id").eq(user_id))
-    hugs_not_spent = [item for item in response["Items"] if not is_hug_spent(item)]
-    return len(hugs_not_spent)
+    scan_kwargs = {
+        'FilterExpression': Key('receiver_id').eq(user_id),
+        'ProjectionExpression': "receiver_id, spent"
+    }
+
+    done = False
+    start_key = None
+    hugs_not_spent = 0
+    while not done:
+        if start_key:
+            scan_kwargs['ExclusiveStartKey'] = start_key
+        response = table.scan(**scan_kwargs)
+        hugs_not_spent += len([item for item in response["Items"] if not is_hug_spent(item)])
+        start_key = response.get('LastEvaluatedKey', None)
+        done = start_key is None
+
+    return hugs_not_spent
 
 
 def give_hug(sender_id, sender_name, receiver_id, receiver_name, message):
