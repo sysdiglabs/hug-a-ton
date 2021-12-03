@@ -1,8 +1,12 @@
+import os
+
 from unittest import mock
 
 import pytest
 
-import dynamodb
+with mock.patch.dict(os.environ, {"AWS_DEFAULT_REGION": "us-east-1"}, clear=True):
+    import dynamodb
+
 from lambda_function import lambda_handler, execute_command
 
 
