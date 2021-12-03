@@ -17,6 +17,11 @@ class mockTable:
         return {"Items": []}
 
 
+class mockDynamodb:
+    def Table(*args, **kwords):
+        return mockTable
+
+
 HELP_EVENT = {
     "version": "2.0",
     "routeKey": "ANY /AlvarL1",
@@ -61,7 +66,7 @@ HELP_EVENT = {
 HELP_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":wave: *Welcome to Hug-a-ton*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Use this command to share love & appreciation with your coworkers"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Give a hug*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Somebody helped you out? Have you seen an awesome contribution? Just send a hug to a coworker with:```/hug @john.doe [message]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "An anonymous message will be posted to #-hugs_ with your message tagging the _hugee_"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Check your balance*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Wanna know the hugs you have available to give, or the hugs you\'ve received? Use:```/hug balance```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "You\'ll get a private message with your balance"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Pay it forward*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Got enough hugs from your cowokers? Share the love outside Sysdig with:```/hug donate [quantity] [charity_link]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "A message will be post to #-hugs_ with about the donation and HR will reach out to proceed with the donation."}}]}',
+    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":wave: *Welcome to Hug-a-ton*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Use this command to share love & appreciation with your coworkers."}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Give a hug*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Somebody helped you out? Have you seen an awesome contribution? Just send a hug to a coworker with:```/hug @john.doe [message]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "An anonymous message will be posted to #-hugs_ with your message tagging the _hugee_"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Check your balance*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Wanna know the hugs you have available to give, or the hugs you\'ve received? Use:```/hug balance```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "You\'ll get a private message with your balance"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Pay it forward*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Got enough hugs from your cowokers? Share the love outside Sysdig with:```/hug donate [quantity] [charity_link]```"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "A message will be post to #-hugs_ with about the donation and HR will reach out to proceed with the donation."}}]}',
 }
 
 
@@ -91,17 +96,17 @@ BODY = {
 BALANCE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":hugging_face: *20 hugs available*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Hug away! Remember hugs are reset at the beginning of the month"}}, {"type": "section", "text": {"type": "mrkdwn", "text": ":sad_panda: *No hugs received yet*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Don\'t give up! Keep trying, soon your effort will be recognized!"}}]}',
+    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":hug-a-ton: *20 hugs available*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Hug away! Remember hugs are reset at the beginning of the month"}}, {"type": "section", "text": {"type": "mrkdwn", "text": ":sadpanda: *No hugs received yet*"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "Don\'t give up! Keep trying, soon your effort will be recognized!"}}]}',
 }
 DONATE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":sad_panda: *You only have received 0 hugs. You can not donate 200, as it is bigger*"}}]}',
+    "body": '{"blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": ":sadpanda: *You only have received 0 hugs. You can not donate 200, as it is bigger*"}}]}',
 }
 GIVE_RESPONSE = {
     "statusCode": 200,
     "headers": {"Content-type": "application/json"},
-    "body": ":hugging_face: Hug successfully sent!",
+    "body": ":hug-a-ton: Hug successfully sent!. You have 20 hugs left",
 }
 
 
@@ -118,7 +123,7 @@ GIVE_RESPONSE = {
         pytest.param("help", HELP_RESPONSE, id="help"),
     ],
 )
-@mock.patch("dynamodb.table", mockTable)
+@mock.patch("dynamodb.dynamodb", mockDynamodb)
 def test_parse_command(text, response, mocker):
     body = BODY
     body["text"] = [f"{text}"]
