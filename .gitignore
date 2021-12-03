@@ -1,5 +1,8 @@
+.coverage
+.tox
+reports
+*.egg-info
 .terraform
 builds
 terraform.tfstate*
 terraform/.sysdig.tfvars
-
