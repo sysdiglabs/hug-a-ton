@@ -30,7 +30,7 @@ def notify_hug_in_channel(receiver, message):
     url = "https://slack.com/api/chat.postMessage"
     token = os.getenv("SLACK_TOKEN")
     slack_fields = {
-        "channel": os.environ["SLACK_KUDOS_CHANNEL"],
+        "channel": os.getenv("SLACK_KUDOS_CHANNEL", "C02P6RXLQ83"),
         "blocks": json.dumps(format_text(receiver, message)),
     }
     http = urllib3.PoolManager()
