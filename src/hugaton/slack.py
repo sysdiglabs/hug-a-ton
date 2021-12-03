@@ -5,6 +5,7 @@ import emojis
 
 
 def format_text(receiver, message):
+    upper_fix_lettter = message[0].upper() + message[1:]
     return [
         {
             "type": "section",
@@ -15,7 +16,7 @@ def format_text(receiver, message):
         },
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f"> {message.capitalize()}"},
+            "text": {"type": "mrkdwn", "text": f"> {upper_fix_lettter}"},
         },
     ]
 
