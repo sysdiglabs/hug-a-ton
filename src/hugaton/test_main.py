@@ -1,4 +1,5 @@
 import os
+import urllib3
 
 from unittest import mock
 
@@ -132,3 +133,31 @@ def test_parse_command(text, response, mocker):
     body = BODY
     body["text"] = [f"{text}"]
     assert execute_command(body) == response
+
+
+@pytest.mark.parametrize(
+    "message, formatted_message",
+    [
+        ("message starting with SMALL CASE", "> Message starting with SMALL CASE"),
+        ("Message starting with UPPER CASE", "> Message starting with UPPER CASE"),
+    ],
+)
+@mock.patch("dynamodb.dynamodb", mockDynamodb)
+def test_hug_message_sent(message, formatted_message):
+    http_mock = mock.Mock()
+    body = BODY
+    receiver = "<@U02NYLASM52|andres.fuentes>"
+    body["text"] = [f"{receiver} {message}"]
+    blocks = f'[{{"type": "section", "text": {{"type": "mrkdwn", "text": ":hugging_face: {receiver} got hugged:"}}}}, {{"type": "section", "text": {{"type": "mrkdwn", "text": "{formatted_message}"}}}}]'
+    with mock.patch.object(urllib3, "PoolManager", return_value=http_mock):
+        execute_command(body)
+        print(http_mock.mock_calls)
+        http_mock.request.assert_called_once_with(
+            "POST",
+            "https://slack.com/api/chat.postMessage",
+            headers={
+                "Content-type": "application/json",
+                "Authorization": "Bearer None",
+            },
+            fields={"channel": "C02P6RXLQ83", "blocks": blocks},
+        )
